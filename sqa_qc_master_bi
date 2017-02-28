@@ -1,0 +1,23 @@
+SET DEFINE OFF;
+DROP TRIGGER SQA_QC_MASTER_BI
+/
+
+CREATE OR REPLACE TRIGGER SQA_QC_MASTER_BI
+BEFORE INSERT ON SQA_QC_MASTER
+FOR EACH ROW
+DECLARE
+  P_ID       number;
+  p_load     date;
+BEGIN
+
+        SELECT SQA_QC_MASTER_SEQ.NEXTVAL, trunc(sysdate)
+        INTO P_ID,p_load
+        FROM DUAL;
+
+       :new.PID := P_ID;
+       :new.load_date := p_load;
+       
+         
+END;
+/
+SHOW ERRORS;
