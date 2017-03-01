@@ -1,0 +1,18 @@
+CREATE OR REPLACE TRIGGER sqa_qc_job_titles_bi
+BEFORE INSERT ON SQA_QC_JOB_TITLES
+FOR EACH ROW
+DECLARE
+  P_ID       number;
+  p_create    date;
+BEGIN
+
+        SELECT SQA_QC_JOB_TITLES_SEQ.NEXTVAL, trunc(sysdate)
+        INTO P_ID,p_create
+        FROM DUAL;
+
+       :new.PID := P_ID;
+       :new.CREATED_DATE := p_create;
+       
+         
+END;
+/
